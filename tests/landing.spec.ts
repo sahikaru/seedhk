@@ -21,6 +21,16 @@ test.describe("Landing page structure", () => {
     await expect(page.getByRole("heading", { name: "即刻造梦" })).toBeVisible();
     await expect(page.getByText("宇航员沉浸在缤纷迷幻的世界")).toBeVisible();
     await expect(page.getByRole("link", { name: "即梦成片" }).first()).toBeVisible();
+
+    const heroVideo = page.locator("video").first();
+    await expect(heroVideo).toHaveAttribute(
+      "src",
+      "/assets/videos/feature-2.mp4"
+    );
+    await expect(heroVideo).toHaveAttribute(
+      "poster",
+      "/assets/videos/posters/feature-2.jpg"
+    );
   });
 
   test("renders video feature section", async ({ page }) => {

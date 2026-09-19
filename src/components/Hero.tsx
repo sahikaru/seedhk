@@ -8,8 +8,8 @@ export default function Hero() {
       {/* Background Video */}
       <video
         className="absolute inset-0 w-full h-full object-cover"
-        src="/assets/videos/hero.mp4"
-        poster="/assets/videos/posters/hero.jpg"
+        src="/assets/videos/feature-2.mp4"
+        poster="/assets/videos/posters/feature-2.jpg"
         autoPlay
         muted
         loop
