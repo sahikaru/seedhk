@@ -8,7 +8,7 @@ export default function SmartCanvas() {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section className="w-full bg-white py-20 md:py-32">
+    <section id="smart-canvas" className="w-full bg-white py-20 md:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="mx-auto mb-10 max-w-3xl text-center md:mb-14">
@@ -52,7 +52,7 @@ export default function SmartCanvas() {
               className={`relative pb-3 text-base font-medium transition-colors md:text-lg ${
                 activeTab === index
                   ? "text-blue-600"
-                  : "text-gray-400 hover:text-gray-600"
+                  : "text-gray-600 hover:text-gray-800"
               }`}
             >
               {tab.label}
@@ -69,7 +69,7 @@ export default function SmartCanvas() {
           {/* Background board */}
           <Image
             src={smartCanvasSection.background}
-            alt="Smart Canvas board"
+            alt="即梦AI智能画布编辑界面"
             width={1200}
             height={800}
             className="w-full"

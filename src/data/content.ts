@@ -1,33 +1,125 @@
 export const siteConfig = {
-  title: "即梦AI - 即刻造梦",
+  title: "即梦AI功能介绍｜Seedance AI视频生成与智能画布指南",
+  shortTitle: "即梦AI · Seedance 创作指南",
   description:
-    "即梦AI是字节跳动旗下免费AI图片和视频创作平台，提供文生图、视频生成、智能画布等AI创作工具。输入简单的文案或图片，即可快速生成优质AI视频和图片作品。",
-  keywords:
-    "即梦AI,AI绘画,AI视频生成,文生图,智能画布,AI创作,字节跳动,Dreamina",
+    "了解即梦AI与Seedance的视频生成、文生图、图生视频和智能画布能力，查看中文使用步骤、常见问题与官方入口。",
+  keywords: [
+    "即梦AI",
+    "Seedance",
+    "Seedance AI",
+    "AI视频生成",
+    "文生视频",
+    "图生视频",
+    "AI绘画",
+    "智能画布",
+    "Dreamina",
+  ],
   url: "https://seedancehk.com",
-  ogImage: "/assets/images/backgrounds/ai-painting-bg.jpg",
-  company: {
-    name: "深圳市脸萌科技有限公司",
-    address: "深圳市南山区招商街道水湾社区太子路51号太子广场1104",
-  },
+  ogImage: "/assets/images/backgrounds/og-home.jpg",
+  publisher: "SeedanceHK AI 创作指南",
+  lastReviewed: "2026-09-19",
+  disclaimer:
+    "本站为独立的产品介绍与使用指南，不代表字节跳动、剪映或即梦AI官方。页面中的创作入口会跳转至即梦AI官方网站。",
 };
 
 export const navLinks = [
-  { label: "文生图", href: "https://jimeng.jianying.com/ai-tool/image/generate" },
-  { label: "视频生成", href: "https://jimeng.jianying.com/ai-tool/home" },
-  { label: "智能画布", href: "https://jimeng.jianying.com/ai-tool/home" },
-  { label: "探索", href: "https://jimeng.jianying.com/ai-tool/explore" },
-  { label: "未来影像计划", href: "https://jimeng.jianying.com/visionary" },
+  { label: "视频生成", href: "#video-features" },
+  { label: "AI绘画", href: "#ai-painting" },
+  { label: "智能画布", href: "#smart-canvas" },
+  { label: "使用指南", href: "#guide" },
+  { label: "常见问题", href: "#faq" },
 ];
 
 export const ctaLink = "https://jimeng.jianying.com/ai-tool/home";
 
 export const heroSection = {
+  eyebrow: "即梦AI · Seedance 创作指南",
   heading: "即刻造梦",
-  video: "/assets/videos/hero.mp4",
-  poster: "/assets/videos/posters/hero.jpg",
+  description:
+    "从中文提示词到 AI 视频、图片与智能画布，一页了解核心能力、创作流程和官方入口。",
+  desktopImage: "/assets/images/backgrounds/hero-cosmic-desktop.webp",
+  mobileImage: "/assets/images/backgrounds/hero-cosmic-mobile.webp",
+  mediaAlt: "宇航员置身于绚丽宇宙梦境的AI创作画面",
   promptText: "宇航员沉浸在缤纷迷幻的世界",
   ctaText: "即梦成片",
+};
+
+export const guideSection = {
+  heading: "即梦AI 与 Seedance 能做什么？",
+  intro:
+    "即梦AI是面向创作者的AI内容创作平台，提供视频生成、AI绘画与智能画布等工具。Seedance是字节跳动Seed团队的视频生成模型系列，可根据文本、图片等参考素材生成和编辑视频。",
+  updatedText: "资料核对日期：2026年9月19日",
+  capabilities: [
+    {
+      title: "文生视频与图生视频",
+      description:
+        "输入中文场景、动作、镜头和风格描述，或上传参考图片，将创意转化为动态视频片段。",
+    },
+    {
+      title: "AI绘画与图片改造",
+      description:
+        "通过提示词生成图片，也可围绕主体、背景、画风和构图继续调整，适合概念图与视觉素材制作。",
+    },
+    {
+      title: "智能画布与局部编辑",
+      description:
+        "在同一画布中组织多张素材，进行扩图、消除、抠图和局部重绘，保持整体风格统一。",
+    },
+  ],
+  steps: [
+    {
+      number: "01",
+      title: "明确画面目标",
+      description: "先写清主体、环境、动作、镜头、光线和风格，避免只输入抽象形容词。",
+    },
+    {
+      number: "02",
+      title: "选择生成方式",
+      description: "需要从零创作时使用文生视频；需要保持人物或构图时，优先使用图片或多模态参考。",
+    },
+    {
+      number: "03",
+      title: "迭代与导出",
+      description: "先用短片验证动作和镜头，再逐步调整提示词、参考素材与画面细节。",
+    },
+  ],
+  sources: [
+    {
+      label: "字节跳动 Seedance 模型介绍",
+      href: "https://seed.bytedance.com/en/seedance",
+    },
+    {
+      label: "即梦AI 官方创作平台",
+      href: "https://jimeng.jianying.com/",
+    },
+  ],
+};
+
+export const faqSection = {
+  heading: "即梦AI 与 Seedance 常见问题",
+  description: "关于入口、能力和使用方式的简明说明。",
+  items: [
+    {
+      question: "即梦AI和Seedance是什么关系？",
+      answer:
+        "Seedance是字节跳动Seed团队的视频生成模型系列；即梦AI是用户进行AI图片与视频创作的平台之一。模型版本和平台可用功能可能随地区、账号与产品更新而变化。",
+    },
+    {
+      question: "即梦AI支持哪些创作方式？",
+      answer:
+        "页面展示的主要能力包括文生视频、图生视频、AI绘画和智能画布。实际可用功能、生成时长与规格请以即梦AI官方页面中的当前说明为准。",
+    },
+    {
+      question: "怎样写出更有效的中文视频提示词？",
+      answer:
+        "建议依次描述主体、环境、动作、镜头运动、光线、色彩与画面风格，并明确不希望出现的内容。先用短提示词验证主体，再逐步增加镜头和细节约束。",
+    },
+    {
+      question: "这个网站是即梦AI官网吗？",
+      answer:
+        "不是。seedancehk.com 是独立的产品介绍与使用指南，页面中的“立即创作”等按钮会跳转至即梦AI官方网站。",
+    },
+  ],
 };
 
 export const videoFeatureSection = {
@@ -189,34 +281,10 @@ export const ctaBannerSection = {
 };
 
 export const footerSection = {
-  legal: [
-    {
-      label: "营业执照",
-      href: "https://lf9-cdn-tos.draftstatic.com/obj/ies-hotsoon-draft/vco/jimeng_certification.html",
-    },
-    {
-      label: "用户协议",
-      href: "https://lf9-cdn-tos.draftstatic.com/obj/ies-hotsoon-draft/vco/17620dba-f821-4a18-85f9-b8b11f73304a.html",
-    },
-    {
-      label: "隐私政策",
-      href: "https://lf3-cdn-tos.draftstatic.com/obj/ies-hotsoon-draft/vco/fadfa00e-21c4-41ac-a1ac-c694e7ccedca.html",
-    },
+  official: [
+    { label: "即梦AI 官网", href: "https://jimeng.jianying.com/" },
+    { label: "Seedance 模型页", href: "https://seed.bytedance.com/en/seedance" },
   ],
-  icp: [
-    {
-      label: "粤ICP备13065114号",
-      href: "https://beian.miit.gov.cn/",
-    },
-    {
-      label: "粤B2-20190879",
-      href: "https://lf3-cdn-tos.draftstatic.com/obj/ies-hotsoon-draft/vco/jimeng_icp.html",
-    },
-  ],
-  police: {
-    label: "粤公网安备44030002004191号",
-    href: "https://beian.mps.gov.cn/#/query/webSearch?code=44030002004191",
-  },
   social: [
     {
       label: "抖音",

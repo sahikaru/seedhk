@@ -9,27 +9,32 @@ test.describe("Landing page structure", () => {
     const header = page.locator("header");
     await expect(header).toBeVisible();
 
-    await expect(page.getByRole("link", { name: "即梦AI" }).first()).toBeVisible();
-    await expect(page.getByRole("navigation").getByRole("link", { name: "文生图" })).toBeVisible();
-    await expect(page.getByRole("navigation").getByRole("link", { name: "视频生成" })).toBeVisible();
-    await expect(page.getByRole("navigation").getByRole("link", { name: "智能画布" })).toBeVisible();
-    await expect(page.getByRole("navigation").getByRole("link", { name: "探索" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "即梦AI创作指南首页" })).toBeVisible();
+    const mainNav = page.getByRole("navigation", { name: "主导航" });
+    await expect(mainNav.getByRole("link", { name: "视频生成" })).toBeVisible();
+    await expect(mainNav.getByRole("link", { name: "AI绘画" })).toBeVisible();
+    await expect(mainNav.getByRole("link", { name: "智能画布" })).toBeVisible();
+    await expect(mainNav.getByRole("link", { name: "使用指南" })).toBeVisible();
+    await expect(mainNav.getByRole("link", { name: "常见问题" })).toBeVisible();
     await expect(page.getByRole("link", { name: "开启即梦" })).toBeVisible();
   });
 
   test("renders hero section", async ({ page }) => {
     await expect(page.getByRole("heading", { name: "即刻造梦" })).toBeVisible();
+    await expect(page.getByText("即梦AI · Seedance 创作指南").first()).toBeVisible();
     await expect(page.getByText("宇航员沉浸在缤纷迷幻的世界")).toBeVisible();
     await expect(page.getByRole("link", { name: "即梦成片" }).first()).toBeVisible();
 
-    const heroVideo = page.locator("video").first();
-    await expect(heroVideo).toHaveAttribute(
-      "src",
-      "/assets/videos/feature-2.mp4"
+    const heroPicture = page.locator("section").first().locator("picture");
+    await expect(
+      heroPicture.locator('source[media="(max-width: 767px)"]')
+    ).toHaveAttribute(
+      "srcset",
+      "/assets/images/backgrounds/hero-cosmic-mobile.webp"
     );
-    await expect(heroVideo).toHaveAttribute(
-      "poster",
-      "/assets/videos/posters/feature-2.jpg"
+    await expect(heroPicture.locator("img")).toHaveAttribute(
+      "src",
+      "/assets/images/backgrounds/hero-cosmic-desktop.webp"
     );
   });
 
@@ -88,11 +93,25 @@ test.describe("Landing page structure", () => {
     ).toBeVisible();
   });
 
+  test("renders product guide and FAQs", async ({ page }) => {
+    await expect(
+      page.getByRole("heading", { name: "即梦AI 与 Seedance 能做什么？" })
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "从提示词到第一段 AI 视频" })
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "即梦AI 与 Seedance 常见问题" })
+    ).toBeVisible();
+    await expect(page.locator("#faq details")).toHaveCount(4);
+  });
+
   test("renders footer", async ({ page }) => {
     const footer = page.locator("footer");
     await expect(footer).toBeVisible();
-    await expect(page.getByText("深圳市脸萌科技有限公司")).toBeVisible();
-    await expect(page.getByText("粤ICP备13065114号")).toBeVisible();
+    await expect(footer).toContainText("独立的产品介绍与使用指南");
+    await expect(footer).toContainText("SeedanceHK AI 创作指南");
+    await expect(footer).not.toContainText("粤ICP备13065114号");
   });
 
   test("smart canvas tab switching works", async ({ page }) => {

@@ -4,6 +4,7 @@ import { aiPaintingSection, ctaLink } from "@/data/content";
 export default function AIPainting() {
   return (
     <section
+      id="ai-painting"
       className="relative w-full bg-cover bg-center bg-no-repeat py-20 md:py-32"
       style={{
         backgroundImage:

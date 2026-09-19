@@ -40,6 +40,8 @@ export default function CTABanner() {
             loop
             muted
             playsInline
+            preload="metadata"
+            aria-label="即梦AI创作按钮动态背景"
             className="absolute inset-0 w-full h-full object-cover"
           >
             <source src="/assets/videos/cta-btn-bg.mp4" type="video/mp4" />

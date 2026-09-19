@@ -1,11 +1,13 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { videoFeatureSection, ctaLink } from "@/data/content";
 
 export default function VideoFeature() {
   const features = videoFeatureSection.features;
   return (
     <section
+      id="video-features"
       className="relative w-full py-20 md:py-32 overflow-hidden"
       style={{
         background:
@@ -65,6 +67,8 @@ export default function VideoFeature() {
                 {/* CTA Button */}
                 <a
                   href={ctaLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-white text-sm font-medium group w-fit"
                 >
                   <span className="border-b border-white/30 group-hover:border-white pb-0.5 transition-colors duration-300">
@@ -89,14 +93,10 @@ export default function VideoFeature() {
               {/* Right Side (60%) - Video */}
               <div className="w-full md:w-[60%]">
                 <div className="relative rounded-2xl overflow-hidden aspect-video bg-black/20">
-                  <video
-                    className="w-full h-full object-cover"
+                  <LazyFeatureVideo
                     src={feature.video}
                     poster={feature.poster}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
+                    label={`${feature.title.replace("\n", "")} AI视频示例`}
                   />
                 </div>
               </div>
@@ -105,5 +105,60 @@ export default function VideoFeature() {
         </div>
       </div>
     </section>
+  );
+}
+
+function LazyFeatureVideo({
+  src,
+  poster,
+  label,
+}: {
+  src: string;
+  poster: string;
+  label: string;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "240px" }
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!shouldLoad || !videoRef.current) return;
+
+    videoRef.current.load();
+    videoRef.current.play().catch(() => {
+      // The poster remains visible when autoplay is unavailable.
+    });
+  }, [shouldLoad]);
+
+  return (
+    <video
+      ref={videoRef}
+      className="h-full w-full object-cover"
+      poster={poster}
+      muted
+      loop
+      playsInline
+      preload="none"
+      aria-label={label}
+    >
+      {shouldLoad ? <source src={src} type="video/mp4" /> : null}
+    </video>
   );
 }

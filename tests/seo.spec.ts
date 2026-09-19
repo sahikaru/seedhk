@@ -6,14 +6,16 @@ test.describe("SEO validation", () => {
   });
 
   test("has correct page title", async ({ page }) => {
-    await expect(page).toHaveTitle("即梦AI - 即刻造梦");
+    await expect(page).toHaveTitle(
+      "即梦AI功能介绍｜Seedance AI视频生成与智能画布指南"
+    );
   });
 
   test("has meta description", async ({ page }) => {
     const description = page.locator('meta[name="description"]');
     await expect(description).toHaveAttribute(
       "content",
-      /即梦AI是字节跳动旗下免费AI图片和视频创作平台/
+      /了解即梦AI与Seedance的视频生成/
     );
   });
 
@@ -60,9 +62,9 @@ test.describe("SEO validation", () => {
     const content = await jsonLd.textContent();
     expect(content).toBeTruthy();
     const data = JSON.parse(content!);
-    expect(data["@type"]).toBe("WebSite");
-    expect(data.name).toBe("即梦AI");
-    expect(data.url).toBe("https://seedancehk.com");
+    expect(data["@graph"]).toBeInstanceOf(Array);
+    expect(data["@graph"].map((item: { ["@type"]: string }) => item["@type"]))
+      .toEqual(expect.arrayContaining(["WebSite", "WebPage", "ImageObject", "FAQPage"]));
   });
 
   test("has correct lang attribute", async ({ page }) => {
@@ -70,12 +72,15 @@ test.describe("SEO validation", () => {
     await expect(html).toHaveAttribute("lang", "zh-CN");
   });
 
-  test("all images have alt text", async ({ page }) => {
+  test("all images have alt attributes and decorative images are hidden", async ({ page }) => {
     const images = page.locator("img");
     const count = await images.count();
     for (let i = 0; i < count; i++) {
       const alt = await images.nth(i).getAttribute("alt");
-      expect(alt, `Image ${i} missing alt text`).toBeTruthy();
+      expect(alt, `Image ${i} missing alt attribute`).not.toBeNull();
+      if (alt === "") {
+        await expect(images.nth(i)).toHaveAttribute("aria-hidden", "true");
+      }
     }
   });
 
@@ -87,5 +92,25 @@ test.describe("SEO validation", () => {
     const h2s = page.locator("h2");
     const h2Count = await h2s.count();
     expect(h2Count).toBeGreaterThanOrEqual(4);
+  });
+
+  test("publishes crawl and discovery endpoints", async ({ request }) => {
+    const robots = await request.get("/robots.txt");
+    expect(robots.ok()).toBeTruthy();
+    expect(await robots.text()).toContain("Sitemap: https://seedancehk.com/sitemap.xml");
+
+    const sitemap = await request.get("/sitemap.xml");
+    expect(sitemap.ok()).toBeTruthy();
+    const sitemapText = await sitemap.text();
+    expect(sitemapText).toContain("https://seedancehk.com/");
+    expect(sitemapText).toContain("hero-cosmic-desktop.webp");
+
+    const indexNowKey = await request.get(
+      "/cdd6cc31311c9aae1cf9b712218dd870.txt"
+    );
+    expect(indexNowKey.ok()).toBeTruthy();
+    expect(await indexNowKey.text()).toContain(
+      "cdd6cc31311c9aae1cf9b712218dd870"
+    );
   });
 });

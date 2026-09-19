@@ -4,6 +4,7 @@ import VideoFeature from "@/components/VideoFeature";
 import AIPainting from "@/components/AIPainting";
 import SmartCanvas from "@/components/SmartCanvas";
 import Community from "@/components/Community";
+import CreationGuide from "@/components/CreationGuide";
 import CTABanner from "@/components/CTABanner";
 import Footer from "@/components/Footer";
 
@@ -11,12 +12,13 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main>
+      <main id="main-content">
         <Hero />
         <VideoFeature />
         <AIPainting />
         <SmartCanvas />
         <Community />
+        <CreationGuide />
         <CTABanner />
       </main>
       <Footer />
