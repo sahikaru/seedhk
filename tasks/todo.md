@@ -7,7 +7,7 @@
 - [x] 补充 Bing IndexNow 与面向搜索引擎/AI 抓取器的明确抓取规则
 - [x] 修复本次范围内发现的 SEO lint 问题并扩充自动化测试
 - [x] 运行 lint、构建、端到端测试、Lighthouse 和本地视觉验收
-- [ ] 推送 GitHub，确认线上部署与搜索资源可访问
+- [x] 推送 GitHub，确认线上部署与搜索资源可访问
 
 ## Review
 
@@ -18,3 +18,5 @@
 - ESLint无错误；生产构建通过；Playwright 21项测试全部通过。
 - Lighthouse：SEO 100、Accessibility 100、Best Practices 100；无网络节流的本地性能基准为100。
 - 桌面1440×1000与手机390×844视口均完成视觉验收。
+- GitHub提交 `054c826` 已由Vercel部署；线上标题、手机首屏、robots、sitemap、JSON-LD与IndexNow密钥均已验证。
+- Bing IndexNow 已接受首页更新（HTTP 202）。Google Search Console 与 Bing Webmaster Tools 的后台注册仍需用户先登录对应账号。
