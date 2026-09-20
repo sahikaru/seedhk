@@ -103,7 +103,7 @@ test.describe("SEO validation", () => {
     expect(sitemap.ok()).toBeTruthy();
     const sitemapText = await sitemap.text();
     expect(sitemapText).toContain("https://seedancehk.com/");
-    expect(sitemapText).toContain("hero-astronaut-enhanced.webp");
+    expect(sitemapText).toContain("hero-jellyfish-enhanced.webp");
 
     const indexNowKey = await request.get(
       "/cdd6cc31311c9aae1cf9b712218dd870.txt"
@@ -122,6 +122,8 @@ test.describe("SEO validation", () => {
       expect(html).toContain("即梦AI和Seedance是什么关系？");
       expect(html).toContain("明确画面目标");
       expect(html).not.toContain("hero-cosmic");
+      expect(html).not.toContain("hero-astronaut");
+      expect(html).toContain("hero-jellyfish-enhanced-4k.mp4");
       expect(html).not.toContain('content="noindex');
       const match = html.match(/<script type="application\/ld\+json">(.*?)<\/script>/);
       const graph = JSON.parse(match![1])["@graph"];

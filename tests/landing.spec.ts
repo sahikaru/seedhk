@@ -30,6 +30,10 @@ test.describe("Landing page structure", () => {
       node.readyState >= 2 && !node.paused && node.currentTime > 0
     )).toBe(true);
     expect(await video.evaluate((node: HTMLVideoElement) => node.videoWidth)).toBe(3840);
+    expect(await video.evaluate((node: HTMLVideoElement) => node.videoHeight)).toBe(2152);
+    expect(await video.evaluate((node: HTMLVideoElement) => node.currentSrc)).toContain("hero-jellyfish-enhanced-4k.mp4");
+    expect(await video.evaluate((node: HTMLVideoElement) => node.duration)).toBeCloseTo(5.9, 1);
+    await expect(video).toHaveAttribute("aria-label", /水母/);
     await expect(hero.locator("picture")).toHaveCount(0);
     await expect(hero.getByText("独立内容指南", { exact: false })).toHaveCount(0);
   });
@@ -43,6 +47,9 @@ test.describe("Landing page structure", () => {
       node.readyState >= 2 && !node.paused && node.currentTime > 0
     )).toBe(true);
     expect(await video.evaluate((node: HTMLVideoElement) => node.videoWidth)).toBe(1920);
+    expect(await video.evaluate((node: HTMLVideoElement) => node.videoHeight)).toBe(1076);
+    expect(await video.evaluate((node: HTMLVideoElement) => node.currentSrc)).toContain("hero-jellyfish-enhanced-1080.mp4");
+    expect(await video.evaluate((node: HTMLVideoElement) => node.duration)).toBeCloseTo(5.9, 1);
     expect(Math.round((await hero.boundingBox())!.height)).toBe(844);
     await expect(hero.getByRole("link", { name: "即梦成片" })).toBeInViewport();
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390);

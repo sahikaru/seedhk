@@ -15,7 +15,7 @@ export const siteConfig = {
     "Dreamina",
   ],
   url: "https://seedancehk.com",
-  ogImage: "/assets/images/backgrounds/og-astronaut.jpg",
+  ogImage: "/assets/images/backgrounds/og-jellyfish.jpg",
   publisher: "SeedanceHK AI 创作指南",
   lastReviewed: "2026-09-19",
   lastModified: "2026-09-20",
@@ -37,10 +37,10 @@ export const heroSection = {
   heading: "即刻造梦",
   description:
     "从中文提示词到 AI 视频、图片与智能画布，一页了解核心能力、创作流程和官方入口。",
-  video: "/assets/videos/hero-astronaut-enhanced-2160.mp4",
-  mobileVideo: "/assets/videos/hero-astronaut-enhanced-1080.mp4",
-  poster: "/assets/videos/posters/hero-astronaut-enhanced.webp",
-  mediaAlt: "宇航员置身于绚丽宇宙梦境的AI创作画面",
+  video: "/assets/videos/hero-jellyfish-enhanced-4k.mp4",
+  mobileVideo: "/assets/videos/hero-jellyfish-enhanced-1080.mp4",
+  poster: "/assets/videos/posters/hero-jellyfish-enhanced.webp",
+  mediaAlt: "水母在蓝色梦幻海底游动的AI创作画面",
   promptText: "宇航员沉浸在缤纷迷幻的世界",
   ctaText: "即梦成片",
 };

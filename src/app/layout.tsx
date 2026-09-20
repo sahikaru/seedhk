@@ -30,7 +30,7 @@ export const metadata: Metadata = {
         url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: "宇航员置身绚丽宇宙梦境的即梦AI与Seedance创作指南封面",
+        alt: "水母在蓝色梦幻海底游动的即梦AI与Seedance创作指南封面",
       },
     ],
     locale: "zh_CN",
@@ -109,7 +109,7 @@ export default function RootLayout({
         caption: heroSection.mediaAlt,
         contentUrl: absoluteUrl(heroSection.poster),
         width: 1920,
-        height: 1080,
+        height: 1076,
       },
       {
         "@type": "FAQPage",
