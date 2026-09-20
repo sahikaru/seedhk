@@ -30,7 +30,7 @@ export const metadata: Metadata = {
         url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: "金色水母在蔚蓝水中游动的即梦AI与Seedance创作指南封面",
+        alt: "水母在蓝色梦幻海底游动的即梦AI与Seedance创作指南封面",
       },
     ],
     locale: "zh_CN",
@@ -108,8 +108,8 @@ export default function RootLayout({
         name: heroSection.mediaAlt,
         caption: heroSection.mediaAlt,
         contentUrl: absoluteUrl(heroSection.poster),
-        width: 2560,
-        height: 1440,
+        width: 1920,
+        height: 1076,
       },
       {
         "@type": "FAQPage",
@@ -129,8 +129,7 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <head>
-        <link rel="preload" as="image" href={heroSection.poster} media="(min-width: 768px)" fetchPriority="high" />
-        <link rel="preload" as="image" href={heroSection.mobilePoster} media="(max-width: 767px)" fetchPriority="high" />
+        <link rel="preload" as="image" href={heroSection.poster} fetchPriority="high" />
       </head>
       <body>
         <a

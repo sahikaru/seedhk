@@ -21,7 +21,7 @@ test.describe("Landing page structure", () => {
 
   test("renders hero section", async ({ page }) => {
     await expect(page.getByRole("heading", { name: "即刻造梦" })).toBeVisible();
-    await expect(page.getByText("水母在蔚蓝的水中轻盈漂浮")).toBeVisible();
+    await expect(page.getByText("宇航员沉浸在缤纷迷幻的世界")).toBeVisible();
     await expect(page.getByRole("link", { name: "即梦成片" }).first()).toBeVisible();
 
     const hero = page.locator('section[aria-labelledby="hero-heading"]');
@@ -30,11 +30,11 @@ test.describe("Landing page structure", () => {
       node.readyState >= 2 && !node.paused && node.currentTime > 0
     )).toBe(true);
     expect(await video.evaluate((node: HTMLVideoElement) => node.videoWidth)).toBe(3840);
-    expect(await video.evaluate((node: HTMLVideoElement) => node.videoHeight)).toBe(2160);
-    expect(await video.evaluate((node: HTMLVideoElement) => node.currentSrc)).toContain("hero-jellyfish-6899910-4k.webm");
-    expect(await video.evaluate((node: HTMLVideoElement) => node.duration)).toBeCloseTo(8, 1);
+    expect(await video.evaluate((node: HTMLVideoElement) => node.videoHeight)).toBe(2152);
+    expect(await video.evaluate((node: HTMLVideoElement) => node.currentSrc)).toContain("hero-jellyfish-enhanced-4k.mp4");
+    expect(await video.evaluate((node: HTMLVideoElement) => node.duration)).toBeCloseTo(5.9, 1);
     await expect(video).toHaveAttribute("aria-label", /水母/);
-    await expect(hero.locator("picture")).toHaveCount(1);
+    await expect(hero.locator("picture")).toHaveCount(0);
     await expect(hero.getByText("独立内容指南", { exact: false })).toHaveCount(0);
   });
 
@@ -46,46 +46,14 @@ test.describe("Landing page structure", () => {
     await expect.poll(() => video.evaluate((node: HTMLVideoElement) =>
       node.readyState >= 2 && !node.paused && node.currentTime > 0
     )).toBe(true);
-    expect(await video.evaluate((node: HTMLVideoElement) => node.videoWidth)).toBe(1080);
-    expect(await video.evaluate((node: HTMLVideoElement) => node.videoHeight)).toBe(1920);
-    expect(await video.evaluate((node: HTMLVideoElement) => node.currentSrc)).toContain("hero-jellyfish-6899910-mobile.webm");
-    expect(await video.evaluate((node: HTMLVideoElement) => node.duration)).toBeCloseTo(8, 1);
-    expect(await hero.locator("picture img").evaluate((node: HTMLImageElement) => node.currentSrc)).toContain("6899910-mobile.webp");
-    const requests = await page.evaluate(() => performance.getEntriesByType("resource").map((entry) => entry.name));
-    expect(requests.some((url) => url.includes("6899910-4k."))).toBe(false);
+    expect(await video.evaluate((node: HTMLVideoElement) => node.videoWidth)).toBe(1920);
+    expect(await video.evaluate((node: HTMLVideoElement) => node.videoHeight)).toBe(1076);
+    expect(await video.evaluate((node: HTMLVideoElement) => node.currentSrc)).toContain("hero-jellyfish-enhanced-1080.mp4");
+    expect(await video.evaluate((node: HTMLVideoElement) => node.duration)).toBeCloseTo(5.9, 1);
     expect(Math.round((await hero.boundingBox())!.height)).toBe(844);
     await expect(hero.getByRole("link", { name: "即梦成片" })).toBeInViewport();
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390);
     await page.close();
-  });
-
-  test("clear first frame remains visible when video cannot load", async ({ browser }) => {
-    for (const width of [1440, 390]) {
-      const page = await browser.newPage({ viewport: { width, height: 844 } });
-      await page.route(/hero-jellyfish-6899910-.*\.(mp4|webm)/, (route) => route.abort());
-      await page.goto("/");
-      const poster = page.locator('section[aria-labelledby="hero-heading"] picture img');
-      await expect.poll(() => poster.evaluate((node: HTMLImageElement) => node.complete && node.naturalWidth > 0)).toBe(true);
-      expect(await poster.evaluate((node: HTMLImageElement) => node.naturalWidth)).toBe(width === 390 ? 1080 : 2560);
-      await expect(page.getByRole("heading", { name: "即刻造梦" })).toBeVisible();
-      await page.close();
-    }
-  });
-
-  test("MP4 compatibility renditions also play", async ({ browser }) => {
-    for (const width of [1440, 390]) {
-      const page = await browser.newPage({ viewport: { width, height: 844 } });
-      await page.goto("/");
-      const video = page.locator('section[aria-labelledby="hero-heading"] video');
-      await video.evaluate((node: HTMLVideoElement) => {
-        node.querySelectorAll('source[type^="video/webm"]').forEach((source) => source.remove());
-        node.load();
-      });
-      await expect.poll(() => video.evaluate((node: HTMLVideoElement) => !node.paused && node.currentTime > 0)).toBe(true);
-      expect(await video.evaluate((node: HTMLVideoElement) => node.currentSrc)).toContain(width === 390 ? "6899910-mobile.mp4" : "6899910-4k.mp4");
-      expect(await video.evaluate((node: HTMLVideoElement) => node.videoWidth)).toBe(width === 390 ? 1080 : 3840);
-      await page.close();
-    }
   });
 
   test("renders video feature section", async ({ page }) => {

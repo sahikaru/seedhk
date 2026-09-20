@@ -1,5 +1,7 @@
 # Homepage video source
 
+Status: withdrawn from the homepage on 2026-09-20 following the user's clarification. Only the original blue jellyfish clip (`hero.mp4`) may be used; this stock footage must not be restored as the hero. The information below is historical provenance, not the active media configuration. See `hero-restoration.md` for the current restoration handoff.
+
 - Work: A Jellyfish Swimming Underwater, Pexels ID 6899910.
 - Creator: Marvin Filmaker.
 - Page: https://www.pexels.com/video/a-jellyfish-swimming-underwater-6899910/
