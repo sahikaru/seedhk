@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ctaLink, heroSection } from "@/data/content";
 
 export default function Hero() {
@@ -6,9 +7,21 @@ export default function Hero() {
       className="relative w-full h-screen overflow-hidden"
       aria-labelledby="hero-heading"
     >
+      <picture className="absolute inset-0">
+        <source media="(max-width: 767px)" srcSet={heroSection.mobilePoster} />
+        <Image
+          src={heroSection.poster}
+          alt=""
+          aria-hidden="true"
+          fill
+          unoptimized
+          loading="eager"
+          fetchPriority="high"
+          className="object-cover"
+        />
+      </picture>
       <video
         className="absolute inset-0 w-full h-full object-cover"
-        poster={heroSection.poster}
         autoPlay
         muted
         loop
@@ -18,9 +31,15 @@ export default function Hero() {
       >
         <source
           media="(max-width: 767px)"
+          src={heroSection.efficientMobileVideo}
+          type='video/webm; codecs="vp9"'
+        />
+        <source
+          media="(max-width: 767px)"
           src={heroSection.mobileVideo}
           type="video/mp4"
         />
+        <source src={heroSection.efficientVideo} type='video/webm; codecs="vp9"' />
         <source src={heroSection.video} type="video/mp4" />
       </video>
 

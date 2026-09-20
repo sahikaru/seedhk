@@ -15,7 +15,7 @@ export const siteConfig = {
     "Dreamina",
   ],
   url: "https://seedancehk.com",
-  ogImage: "/assets/images/backgrounds/og-jellyfish.jpg",
+  ogImage: "/assets/images/backgrounds/og-jellyfish-6899910.jpg",
   publisher: "SeedanceHK AI 创作指南",
   lastReviewed: "2026-09-19",
   lastModified: "2026-09-20",
@@ -37,11 +37,14 @@ export const heroSection = {
   heading: "即刻造梦",
   description:
     "从中文提示词到 AI 视频、图片与智能画布，一页了解核心能力、创作流程和官方入口。",
-  video: "/assets/videos/hero-jellyfish-enhanced-4k.mp4",
-  mobileVideo: "/assets/videos/hero-jellyfish-enhanced-1080.mp4",
-  poster: "/assets/videos/posters/hero-jellyfish-enhanced.webp",
-  mediaAlt: "水母在蓝色梦幻海底游动的AI创作画面",
-  promptText: "宇航员沉浸在缤纷迷幻的世界",
+  video: "/assets/videos/hero-jellyfish-6899910-4k.mp4",
+  mobileVideo: "/assets/videos/hero-jellyfish-6899910-mobile.mp4",
+  efficientVideo: "/assets/videos/hero-jellyfish-6899910-4k.webm",
+  efficientMobileVideo: "/assets/videos/hero-jellyfish-6899910-mobile.webm",
+  poster: "/assets/videos/posters/hero-jellyfish-6899910.webp",
+  mobilePoster: "/assets/videos/posters/hero-jellyfish-6899910-mobile.webp",
+  mediaAlt: "金色水母在蔚蓝水中舒展触须的实拍画面",
+  promptText: "水母在蔚蓝的水中轻盈漂浮",
   ctaText: "即梦成片",
 };
 
