@@ -97,7 +97,7 @@ export default function RootLayout({
         primaryImageOfPage: {
           "@id": `${siteConfig.url}/#hero-image`,
         },
-        dateModified: `${siteConfig.lastReviewed}T00:00:00+08:00`,
+        dateModified: `${siteConfig.lastModified}T00:00:00+08:00`,
         mainEntity: [
           { "@id": `${siteConfig.url}/#faq` },
         ],
@@ -106,8 +106,8 @@ export default function RootLayout({
         "@type": "ImageObject",
         "@id": `${siteConfig.url}/#hero-image`,
         name: heroSection.mediaAlt,
-        caption: heroSection.description,
-        contentUrl: absoluteUrl(heroSection.desktopImage),
+        caption: heroSection.mediaAlt,
+        contentUrl: absoluteUrl(heroSection.poster),
         width: 1920,
         height: 1080,
       },
@@ -128,6 +128,9 @@ export default function RootLayout({
 
   return (
     <html lang="zh-CN">
+      <head>
+        <link rel="preload" as="image" href={heroSection.poster} fetchPriority="high" />
+      </head>
       <body>
         <a
           href="#main-content"

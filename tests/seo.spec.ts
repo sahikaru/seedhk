@@ -103,7 +103,7 @@ test.describe("SEO validation", () => {
     expect(sitemap.ok()).toBeTruthy();
     const sitemapText = await sitemap.text();
     expect(sitemapText).toContain("https://seedancehk.com/");
-    expect(sitemapText).toContain("hero-cosmic-desktop.webp");
+    expect(sitemapText).toContain("hero-astronaut-enhanced.webp");
 
     const indexNowKey = await request.get(
       "/cdd6cc31311c9aae1cf9b712218dd870.txt"
@@ -112,5 +112,22 @@ test.describe("SEO validation", () => {
     expect(await indexNowKey.text()).toContain(
       "cdd6cc31311c9aae1cf9b712218dd870"
     );
+  });
+
+  test("search crawlers receive the guide, FAQ and consistent media without JavaScript", async ({ request }) => {
+    for (const bot of ["Googlebot", "bingbot", "Sogou web spider"]) {
+      const response = await request.get("/", { headers: { "User-Agent": bot } });
+      expect(response.status()).toBe(200);
+      const html = await response.text();
+      expect(html).toContain("即梦AI和Seedance是什么关系？");
+      expect(html).toContain("明确画面目标");
+      expect(html).not.toContain("hero-cosmic");
+      expect(html).not.toContain('content="noindex');
+      const match = html.match(/<script type="application\/ld\+json">(.*?)<\/script>/);
+      const graph = JSON.parse(match![1])["@graph"];
+      const image = graph.find((entry: { "@type": string }) => entry["@type"] === "ImageObject");
+      expect((await request.get(image.contentUrl.replace("https://seedancehk.com", ""))).ok()).toBeTruthy();
+      expect(html).toContain(image.contentUrl.replace("https://seedancehk.com", ""));
+    }
   });
 });

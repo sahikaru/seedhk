@@ -3,43 +3,40 @@ import { ctaLink, heroSection } from "@/data/content";
 export default function Hero() {
   return (
     <section
-      className="relative min-h-[720px] w-full overflow-hidden md:h-screen"
+      className="relative w-full h-screen overflow-hidden"
       aria-labelledby="hero-heading"
     >
-      <picture className="absolute inset-0 block overflow-hidden">
+      <video
+        className="absolute inset-0 w-full h-full object-cover"
+        poster={heroSection.poster}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-label={heroSection.mediaAlt}
+      >
         <source
           media="(max-width: 767px)"
-          srcSet={heroSection.mobileImage}
+          src={heroSection.mobileVideo}
+          type="video/mp4"
         />
-        <img
-          src={heroSection.desktopImage}
-          alt={heroSection.mediaAlt}
-          width="1920"
-          height="1080"
-          fetchPriority="high"
-          className="h-full w-full object-cover"
-        />
-      </picture>
+        <source src={heroSection.video} type="video/mp4" />
+      </video>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-[#050610]/90 via-black/20 to-black/30" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-      <div className="relative z-10 flex min-h-[720px] flex-col items-center justify-center px-5 pt-16 text-center md:h-full">
-        <p className="mb-5 rounded-full border border-white/20 bg-black/20 px-4 py-2 text-xs font-medium tracking-[0.18em] text-white/80 backdrop-blur-md md:text-sm">
-          {heroSection.eyebrow}
-        </p>
+      <div className="relative z-10 flex flex-col items-center justify-center h-full px-4">
         <h1
           id="hero-heading"
-          className="mb-5 text-5xl font-bold tracking-wide text-white drop-shadow-lg md:text-8xl"
+          className="text-6xl md:text-8xl font-bold text-white mb-10 tracking-wide"
         >
           {heroSection.heading}
         </h1>
-        <p className="mb-9 max-w-2xl text-base leading-7 text-white/75 drop-shadow md:text-lg">
-          {heroSection.description}
-        </p>
 
         <div className="w-full max-w-2xl">
-          <div className="flex items-center rounded-full border border-white/20 bg-black/25 px-4 py-3 shadow-2xl backdrop-blur-xl md:px-5">
-            <span className="min-w-0 flex-1 truncate text-left text-sm text-white/65 md:text-base">
+          <div className="flex items-center bg-white/10 backdrop-blur-md border border-white/15 rounded-full px-5 py-3">
+            <span className="min-w-0 flex-1 text-gray-300 text-base select-none truncate">
               {heroSection.promptText}
             </span>
 
@@ -47,7 +44,7 @@ export default function Hero() {
               href={ctaLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-3 flex shrink-0 items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 px-4 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:from-blue-600 hover:to-blue-700 md:px-5"
+              className="flex-shrink-0 ml-4 flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white text-sm font-medium px-5 py-2.5 rounded-full transition-all duration-300"
             >
               <svg
                 className="h-4 w-4"
@@ -65,9 +62,6 @@ export default function Hero() {
             </a>
           </div>
         </div>
-        <p className="mt-5 text-xs text-white/55">
-          独立内容指南 · 创作入口跳转至即梦AI官网
-        </p>
       </div>
     </section>
   );

@@ -21,21 +21,32 @@ test.describe("Landing page structure", () => {
 
   test("renders hero section", async ({ page }) => {
     await expect(page.getByRole("heading", { name: "即刻造梦" })).toBeVisible();
-    await expect(page.getByText("即梦AI · Seedance 创作指南").first()).toBeVisible();
     await expect(page.getByText("宇航员沉浸在缤纷迷幻的世界")).toBeVisible();
     await expect(page.getByRole("link", { name: "即梦成片" }).first()).toBeVisible();
 
-    const heroPicture = page.locator("section").first().locator("picture");
-    await expect(
-      heroPicture.locator('source[media="(max-width: 767px)"]')
-    ).toHaveAttribute(
-      "srcset",
-      "/assets/images/backgrounds/hero-cosmic-mobile.webp"
-    );
-    await expect(heroPicture.locator("img")).toHaveAttribute(
-      "src",
-      "/assets/images/backgrounds/hero-cosmic-desktop.webp"
-    );
+    const hero = page.locator('section[aria-labelledby="hero-heading"]');
+    const video = hero.locator("video");
+    await expect.poll(() => video.evaluate((node: HTMLVideoElement) =>
+      node.readyState >= 2 && !node.paused && node.currentTime > 0
+    )).toBe(true);
+    expect(await video.evaluate((node: HTMLVideoElement) => node.videoWidth)).toBe(3840);
+    await expect(hero.locator("picture")).toHaveCount(0);
+    await expect(hero.getByText("独立内容指南", { exact: false })).toHaveCount(0);
+  });
+
+  test("mobile keeps the same video and full-screen composition", async ({ browser }) => {
+    const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    await page.goto("/");
+    const hero = page.locator('section[aria-labelledby="hero-heading"]');
+    const video = hero.locator("video");
+    await expect.poll(() => video.evaluate((node: HTMLVideoElement) =>
+      node.readyState >= 2 && !node.paused && node.currentTime > 0
+    )).toBe(true);
+    expect(await video.evaluate((node: HTMLVideoElement) => node.videoWidth)).toBe(1920);
+    expect(Math.round((await hero.boundingBox())!.height)).toBe(844);
+    await expect(hero.getByRole("link", { name: "即梦成片" })).toBeInViewport();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390);
+    await page.close();
   });
 
   test("renders video feature section", async ({ page }) => {

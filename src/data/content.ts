@@ -15,9 +15,10 @@ export const siteConfig = {
     "Dreamina",
   ],
   url: "https://seedancehk.com",
-  ogImage: "/assets/images/backgrounds/og-home.jpg",
+  ogImage: "/assets/images/backgrounds/og-astronaut.jpg",
   publisher: "SeedanceHK AI 创作指南",
   lastReviewed: "2026-09-19",
+  lastModified: "2026-09-20",
   disclaimer:
     "本站为独立的产品介绍与使用指南，不代表字节跳动、剪映或即梦AI官方。页面中的创作入口会跳转至即梦AI官方网站。",
 };
@@ -33,12 +34,12 @@ export const navLinks = [
 export const ctaLink = "https://jimeng.jianying.com/ai-tool/home";
 
 export const heroSection = {
-  eyebrow: "即梦AI · Seedance 创作指南",
   heading: "即刻造梦",
   description:
     "从中文提示词到 AI 视频、图片与智能画布，一页了解核心能力、创作流程和官方入口。",
-  desktopImage: "/assets/images/backgrounds/hero-cosmic-desktop.webp",
-  mobileImage: "/assets/images/backgrounds/hero-cosmic-mobile.webp",
+  video: "/assets/videos/hero-astronaut-enhanced-2160.mp4",
+  mobileVideo: "/assets/videos/hero-astronaut-enhanced-1080.mp4",
+  poster: "/assets/videos/posters/hero-astronaut-enhanced.webp",
   mediaAlt: "宇航员置身于绚丽宇宙梦境的AI创作画面",
   promptText: "宇航员沉浸在缤纷迷幻的世界",
   ctaText: "即梦成片",
